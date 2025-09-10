@@ -119,11 +119,13 @@ namespace Files.App.Helpers
 					jumpListService.InitializeAsync(),
 					addItemService.InitializeAsync(),
 					ContextMenu.WarmUpQueryContextMenuAsync(),
-					CheckAppUpdate()
 				);
 			});
 
 			FileTagsHelper.UpdateTagsDb();
+
+			// Release notes tab doesn't open unless this is awaited
+			await CheckAppUpdate();
 
 			static Task OptionalTaskAsync(Task task, bool condition)
 			{
